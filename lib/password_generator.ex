@@ -1,7 +1,18 @@
 defmodule PasswordGenerator do
   @moduledoc """
-  Documentation for `PasswordGenerator`.
+  Generates random password depending on parameters, Module main function is 'generate(options)', takes the options map.
+
+  Options example:
+    options = %{
+      "length" => "10",
+      "numbers" => "false",
+      "uppercase" => "false",
+      "symbols" => "false"
+    }
+  The options are only 4, 'length', 'numbers', 'uppercase' and symbols
   """
+
+  @allowed_options [:length, :numbers, :uppercase, :symbols]
 
   @doc """
   Hello world.
@@ -12,7 +23,4 @@ defmodule PasswordGenerator do
       :world
 
   """
-  def hello do
-    :world
-  end
 end
