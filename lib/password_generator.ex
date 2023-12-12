@@ -91,6 +91,16 @@ defmodule PasswordGenerator do
     included = include(options)
     length = length - length(included)
     random_strings = generate_random_strings(length, options)
+    strings = included ++ random_strings
+    get_result(strings)
+  end
+
+  defp get_result(strings) do
+    string = strings
+      |> Enum.shuffle()
+      |> to_string()
+
+    {:ok, string}
   end
 
   defp include(options) do
@@ -99,6 +109,10 @@ defmodule PasswordGenerator do
 
   defp get(:lowercase_letter) do
     <<Enum.random(?a..?z)>>
+  end
+
+  defp generate_random_strings(length, options) do
+    Enum.map(1..length, fn _ -> Enum.random(options) |> get() end)
   end
 
   defp included_options(options) do
