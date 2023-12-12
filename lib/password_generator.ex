@@ -111,6 +111,9 @@ defmodule PasswordGenerator do
     <<Enum.random(?a..?z)>>
   end
 
+  defp get(:uppercase), do: <<Enum.random(?A..?Z)>>
+  defp get(:numbers), do: Enum.random(0..9) |> Integer.to_string()
+
   defp generate_random_strings(length, options) do
     Enum.map(1..length, fn _ -> Enum.random(options) |> get() end)
   end
