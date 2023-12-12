@@ -86,6 +86,21 @@ defmodule PasswordGenerator do
     generate_strings(length, options)
   end
 
+  defp generate_strings(length, options) do
+    options = [:lowercase_letter | options]
+    included = include(options)
+    length = length - length(included)
+    random_strings = generate_random_strings(length, options)
+  end
+
+  defp include(options) do
+    options |> Enum.map(&get(&1))
+  end
+
+  defp get(:lowercase_letter) do
+    <<Enum.random(?a..?z)>>
+  end
+
   defp included_options(options) do
     Enum.filter(options, fn{ _key, value } ->
       value |> String.trim() |> String.to_existing_atom() end)
