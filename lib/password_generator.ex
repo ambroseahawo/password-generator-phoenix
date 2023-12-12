@@ -78,4 +78,10 @@ defmodule PasswordGenerator do
     validate_options(invalid_options?, length, options)
   end
 
+  defp included_options(options) do
+    Enum.filter(options, fn{ _key, value } ->
+      value |> String.trim() |> String.to_existing_atom() end)
+      |> Enum.map(fn { key, _value } -> String.to_atom(key) end)
+  end
+
 end
