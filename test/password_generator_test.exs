@@ -7,7 +7,7 @@ defmodule PasswordGeneratorTest do
   numbers and uppercase - pass
   numbers and symbols - pass
 
-  uppercase and symbols
+  uppercase and symbols - pass
 
   numbers, uppercase and symbols - pass
   """
