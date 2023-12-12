@@ -1,5 +1,17 @@
 defmodule PasswordGeneratorTest do
   use ExUnit.Case
+    @moduledoc """
+    numbers only - pass
+    uppercase only - pass
+    symbols only - pass
+
+    numbers and uppercase - pass
+    numbers and symbols - pass
+
+    uppercase and symbols
+
+    numbers, uppercase and symbols - pass
+    """
   # doctest PasswordGenerator
 
   setup do
@@ -9,6 +21,7 @@ defmodule PasswordGeneratorTest do
       "uppercase" => "false",
       "symbols" => "false"
     }
+
 
     options_type = %{
       lowercase: Enum.map(?a..?z, &<<&1>>),
@@ -159,5 +172,37 @@ defmodule PasswordGeneratorTest do
 
     refute String.contains?(result, options.numbers)
     refute String.contains?(result, options.uppercase)
+  end
+
+  test "return string with numbers and symbols", %{options_type: options} do
+    options_numbers_symbols = %{
+      "length" => "10",
+      "numbers" => "true",
+      "uppercase" => "false",
+      "symbols" => "true"
+    }
+
+    {:ok, result} = PasswordGenerator.generate(options_numbers_symbols)
+
+    assert String.contains?(result, options.numbers)
+    assert String.contains?(result, options.symbols)
+
+    refute String.contains?(result, options.uppercase)
+  end
+
+  test "return string with uppercase and symbols", %{options_type: options} do
+    options_uppercase_symbols = %{
+      "length" => "10",
+      "numbers" => "false",
+      "uppercase" => "true",
+      "symbols" => "true"
+    }
+
+    {:ok, result} = PasswordGenerator.generate(options_uppercase_symbols)
+
+    assert String.contains?(result, options.uppercase)
+    assert String.contains?(result, options.symbols)
+
+    refute String.contains?(result, options.numbers)
   end
 end
