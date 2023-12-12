@@ -68,4 +68,14 @@ defmodule PasswordGenerator do
     validate_options_values_are_boolean(value, length, options_without_length)
   end
 
+  defp validate_options_values_are_boolean(false, _length, _options) do
+    {:error, "Only booleans allowed for options values"}
+  end
+
+  defp validate_options_values_are_boolean(true, length, options) do
+    options = included_options(options)
+    invalid_options? = options |> Enum.any?(&(&1 not in @allowed_options))
+    validate_options(invalid_options?, length, options)
+  end
+
 end
