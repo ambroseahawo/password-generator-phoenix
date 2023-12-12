@@ -1,17 +1,17 @@
 defmodule PasswordGeneratorTest do
+  @moduledoc """
+  numbers only - pass
+  uppercase only - pass
+  symbols only - pass
+
+  numbers and uppercase - pass
+  numbers and symbols - pass
+
+  uppercase and symbols
+
+  numbers, uppercase and symbols - pass
+  """
   use ExUnit.Case
-    @moduledoc """
-    numbers only - pass
-    uppercase only - pass
-    symbols only - pass
-
-    numbers and uppercase - pass
-    numbers and symbols - pass
-
-    uppercase and symbols
-
-    numbers, uppercase and symbols - pass
-    """
   # doctest PasswordGenerator
 
   setup do
