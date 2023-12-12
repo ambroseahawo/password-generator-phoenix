@@ -78,6 +78,14 @@ defmodule PasswordGenerator do
     validate_options(invalid_options?, length, options)
   end
 
+  defp validate_options(true, _length, _options) do
+    {:error, "Only options allowed numbers, uppercase, symbols."}
+  end
+
+  defp validate_options(false, length, options) do
+    generate_strings(length, options)
+  end
+
   defp included_options(options) do
     Enum.filter(options, fn{ _key, value } ->
       value |> String.trim() |> String.to_existing_atom() end)
